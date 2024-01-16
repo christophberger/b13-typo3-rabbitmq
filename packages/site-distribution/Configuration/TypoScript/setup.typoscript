@@ -1,0 +1,76 @@
+// Extensions default config
+@import 'EXT:fluid_styled_content/Configuration/TypoScript/setup.typoscript'
+@import 'EXT:seo/Configuration/TypoScript/XmlSitemap/setup.typoscript'
+
+// Content related configuration
+@import 'EXT:site-distribution/Configuration/TypoScript/Setup/content.typoscript'
+
+
+// Configure Page of typeNum=0 (default)
+page = PAGE
+page {
+  meta {
+    viewport = width=device-width, initial-scale=1
+  }
+
+  shortcutIcon = EXT:site-distribution/Resources/Public/Image/Icon/typo3.svg
+  #  Include inline labels to be used in JavaScript files:
+  inlineLanguageLabelFiles {
+    siteDistribution = EXT:site-distribution/Resources/Private/Language/locallang.xlf
+  }
+
+  10 = FLUIDTEMPLATE
+  10 {
+    templateName = TEXT
+    templateName.data = pagelayout
+    templateName.stdWrap.replacement {
+      10.search = pagets__
+      10.replace =
+    }
+
+    # Create a new backend layout in page.tsconfig
+    # and use <BackendLayoutKey> as template name to
+    # have it automatically resolved.
+
+    // Define template paths
+    templateRootPaths {
+      10 = EXT:site-distribution/Resources/Private/Templates/
+    }
+
+    // Define partial paths
+    partialRootPaths {
+      10 = EXT:site-distribution/Resources/Private/Partials/
+    }
+
+    // Define layout paths
+    layoutRootPaths {
+      10 = EXT:site-distribution/Resources/Private/Layouts/
+    }
+
+    // Variables to be used in the fluid template
+    variables {
+      // Adds current page id
+      pageId = TEXT
+      pageId.data = leveluid:0
+
+      // Adds backend layout name
+      layout = TEXT
+      layout.data = pagelayout
+      layout.stdWrap.replacement {
+        10.search = pagets__
+        10.replace =
+      }
+    }
+
+    dataProcessing {
+      // Configure main menu
+      10 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+      10 {
+        expandAll = 1
+        levels = 2
+        includeSpacer = 1
+        as = mainNavigation
+      }
+    }
+  }
+}

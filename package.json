@@ -1,0 +1,29 @@
+{
+  "name": "typo3-distribution",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "ochorocho",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "watch": "./node_modules/.bin/vite build --watch --mode development",
+    "build:development": "./node_modules/.bin/vite build --mode development",
+    "build:production": "./node_modules/.bin/vite build --mode production"
+  },
+  "engines": {
+    "node": "~18",
+    "npm": "~9"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.14",
+    "postcss-loader": "^7.3.0",
+    "postcss-preset-env": "^9.1.4",
+    "mdn-data": "^2.1.0",
+    "sass": "^1.62.1",
+    "sharp": "^0.32.5",
+    "svgo": "^3.0.2",
+    "vite": "^5.0.0",
+    "vite-plugin-auto-origin": "^1.0.0",
+    "vite-plugin-image-optimizer": "^1.1.7"
+  }
+}
