@@ -2,11 +2,31 @@ services:
   _defaults:
     autowire: true
     autoconfigure: true
-    public: true
+    public: false
 
   Site\Distribution\:
-    resource: '../Classes/*'
-    exclude: '../Classes/Domain/Model/*'
+    resource: "../Classes/*"
+    exclude: "../Classes/Domain/Model/*"
 
-  Site\Distribution\EventListener\ForceUidsOnImport:
-    tags: { name: event.listener }
+  Site\Distribution\Queue\Handler\MyHandler:
+    tags:
+      - name: "messenger.message_handler"
+
+  # RabbitMQ
+  Symfony\Component\Messenger\Bridge\Amqp\Transport\AmqpTransportFactory:
+    public: true
+
+  Symfony\Component\Messenger\Bridge\Amqp\Transport\AmqpTransport:
+    factory:
+      [
+        '@Symfony\Component\Messenger\Bridge\Amqp\Transport\AmqpTransportFactory',
+        "createTransport",
+      ]
+    arguments:
+      $dsn: "amqp://rabbitmq:rabbitmq@rabbitmq:5672/%2f/queue"
+      $options: {}
+    tags:
+      - name: "messenger.sender"
+        identifier: "amqp"
+      - name: "messenger.receiver"
+        identifier: "amqp"

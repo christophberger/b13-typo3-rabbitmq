@@ -6,14 +6,15 @@ database: { type: mariadb, version: "10.6" }
 composer_version: "2"
 nodejs_version: "18"
 web_environment:
-    - TYPO3_CONTEXT=Development
-    - TYPO3_DB_DRIVER=mysqli
-    - TYPO3_DB_USERNAME=db
-    - TYPO3_DB_PASSWORD=db
-    - TYPO3_DB_PORT=3306
-    - TYPO3_DB_HOST=db
-    - TYPO3_DB_DBNAME=db
-    - TYPO3_SETUP_ADMIN_EMAIL=typo3@example.com
-    - TYPO3_SETUP_ADMIN_USERNAME=admin
-    - TYPO3_SETUP_ADMIN_PASSWORD=Password.1
-    - TYPO3_PROJECT_NAME=TYPO3-Dev
+  - TYPO3_CONTEXT=Development
+  - TYPO3_DB_DRIVER=mysqli
+  - TYPO3_DB_USERNAME=db
+  - TYPO3_DB_PASSWORD=db
+  - TYPO3_DB_PORT=3306
+  - TYPO3_DB_HOST=db
+  - TYPO3_DB_DBNAME=db
+  - TYPO3_SETUP_ADMIN_EMAIL=typo3@example.com
+  - TYPO3_SETUP_ADMIN_USERNAME=admin
+  - TYPO3_SETUP_ADMIN_PASSWORD=Password.1
+  - TYPO3_PROJECT_NAME=TYPO3-Dev
+webimage_extra_packages: [php8.1-amqp]

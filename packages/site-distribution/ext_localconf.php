@@ -1,11 +1,14 @@
 <?php
 
-declare(strict_types=1);
+use Site\Distribution\Queue\Message\MyMessage;
+use TYPO3\CMS\Core\Messaging\WebhookMessageInterface;
 
-defined('TYPO3') or die();
+defined('TYPO3') || die();
 
-// Include vite generated manifest file (global)
-$GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['vite_asset_collector']['defaultManifest'] = 'EXT:site-distribution/Resources/Public/.vite/manifest.json';
+// Unset the default, so that it no longer applies
+unset($GLOBALS['TYPO3_CONF_VARS']['SYS']['messenger']['routing']['*']);
 
-// Include custom RTE config
-$GLOBALS['TYPO3_CONF_VARS']['RTE']['Presets']['default'] = 'EXT:site-distribution/Configuration/RTE/RteDefaultPreset.yaml';
+// Set Webhook-Messages and MyMessage to asynchronous transport via amqp (RabbitMQ)
+foreach ([WebhookMessageInterface::class, MyMessage::class] as $className) {
+	$GLOBALS['TYPO3_CONF_VARS']['SYS']['messenger']['routing'][$className] = 'amqp';
+}
