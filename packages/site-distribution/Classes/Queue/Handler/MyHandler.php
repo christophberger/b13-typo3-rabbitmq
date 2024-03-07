@@ -17,14 +17,14 @@ final class MyHandler
 
 	public function __invoke(MyMessage $message): void
 	{
-    	try {
+		try {
 
-        	// Process $message
+			// Process $message
 
-    	} catch (\Exception $exception) {
-        	// Workaround to support infinite retryable messages. So no message gets lost.
-        	$envelope = new Envelope(new MyMessage($message->content), [new DelayStamp(5000)]);
-        	$this->bus->dispatch($envelope);
-    	}
+		} catch (\Exception $exception) {
+			// Workaround to support infinite retryable messages. So no message gets lost.
+			$envelope = new Envelope(new MyMessage($message->content), [new DelayStamp(5000)]);
+			$this->bus->dispatch($envelope);
+		}
 	}
 }
